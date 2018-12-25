@@ -338,7 +338,7 @@ extension LocationPickerViewController: UISearchResultsUpdating {
 
 extension LocationPickerViewController {
     @objc func addLocation(_ gestureRecognizer: UIGestureRecognizer) {
-		if gestureRecognizer.state == .began {
+		if gestureRecognizer.state == .ended {
 			let point = gestureRecognizer.location(in: mapView)
 			let coordinates = mapView.convert(point, toCoordinateFrom: mapView)
 			let location = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
