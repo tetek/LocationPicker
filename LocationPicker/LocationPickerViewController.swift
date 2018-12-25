@@ -69,7 +69,11 @@ open class LocationPickerViewController: UIViewController {
 		didSet {
 			if isViewLoaded {
 				searchBar.text = location.flatMap({ $0.title }) ?? ""
-				updateAnnotation()
+                if (oldValue?.coordinate.latitude != location?.coordinate.latitude
+                    || oldValue?.coordinate.longitude != location?.coordinate.longitude) {
+                    updateAnnotation()
+                }
+				
 			}
 		}
 	}
@@ -338,7 +342,7 @@ extension LocationPickerViewController: UISearchResultsUpdating {
 
 extension LocationPickerViewController {
     @objc func addLocation(_ gestureRecognizer: UIGestureRecognizer) {
-		if gestureRecognizer.state == .ended {
+		if gestureRecognizer.state == .began {
 			let point = gestureRecognizer.location(in: mapView)
 			let coordinates = mapView.convert(point, toCoordinateFrom: mapView)
 			let location = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)

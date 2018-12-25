@@ -13,3 +13,5 @@ build/*
 xcuserdata
 profile
 
+# OS X
+.DS_Store
